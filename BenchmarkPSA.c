@@ -229,7 +229,7 @@ void benchmarkPSA(double STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, int M
     int *tl = (int *)malloc(sizeof(int)*MAX_LOOPS); // allocate memeory for the total iterations in a simulated annealing run: [number of loops]
     omp_set_num_threads(MAX_THREADS);
     total = omp_get_wtime();
-    printf("Beginning Simulated Annealing with %d heat, %d steps, %.2f alpha, and %d threads!\n", STARTING_HEAT, ANNEALING_STEPS, ALPHA, MAX_THREADS);
+    printf("Beginning Simulated Annealing with %.2f heat, %d steps, %.2f alpha, and %d threads!\n", STARTING_HEAT, ANNEALING_STEPS, ALPHA, MAX_THREADS);
     #pragma omp parallel for schedule(dynamic, (MAX_LOOPS / MAX_THREADS))
     for(i = 0; i < MAX_LOOPS; i++)
     {
