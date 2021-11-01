@@ -35,7 +35,7 @@ double ssa_rastrigin(double *s)
     double sum = 0.0;
     for(i = 0; i < STRING_LENGTH; i++)
     {
-        sum += 10 + ((s[i]*s[i]) - 10*cos(M_TWOPI*s[i]));
+        sum += 10 + ((s[i]*s[i]) - 10*cos(2*M_PI*s[i]));
     }
     return sum;
 }
@@ -228,7 +228,7 @@ void benchmarkSSA(double STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, FILE 
     double *tt = (double *)malloc(sizeof(double)*MAX_LOOPS); // allocate memeory for the total time of each simulated annealing: [number of loops]
     int *tl = (int *)malloc(sizeof(int)*MAX_LOOPS); // allocate memeory for the total iterations in a simulated annealing run: [number of loops]
     total = omp_get_wtime();
-    printf("Beginning Simulated Annealing with %d heat, %d steps, and %.2f alpha!\n", STARTING_HEAT, ANNEALING_STEPS, ALPHA);  
+    printf("Beginning Simulated Annealing with %.1f heat, %d steps, and %.2f alpha!\n", STARTING_HEAT, ANNEALING_STEPS, ALPHA);  
 
     ssa_simulated_annealing(ms, os, lm, rt, tl, i, 
                             STARTING_HEAT, 
