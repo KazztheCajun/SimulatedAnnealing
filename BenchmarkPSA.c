@@ -35,7 +35,7 @@ double rastrigin(double *s)
     double sum = 0.0;
     for(i = 0; i < STRING_LENGTH; i++)
     {
-        sum += 10 + ((s[i]*s[i]) - 10*cos(M_TWOPI*s[i]));
+        sum += 10 + ((s[i]*s[i]) - 10*cos(2*M_PI*s[i]));
     }
     return sum;
 }
@@ -108,7 +108,7 @@ void printString(double *s)
 }
 
 
-void simulated_annealing(double *min_strings, double *origin_strings, double *local_minima, double *timeData, int *loopNum, int loop, int STARTING_HEAT, int ANNEALING_STEPS, int ALPHA)
+void simulated_annealing(double *min_strings, double *origin_strings, double *local_minima, double *timeData, int *loopNum, int loop, double STARTING_HEAT, int ANNEALING_STEPS, int ALPHA)
 {
     
     // initialize time, temp, repeat counter, and loop counter
@@ -212,7 +212,7 @@ void simulated_annealing(double *min_strings, double *origin_strings, double *lo
 
 // once algorithm is done, print simple results to console, and detailed stats to a document
 
-void benchmarkPSA(int STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, int MAX_THREADS, FILE *output)
+void benchmarkPSA(double STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, int MAX_THREADS, FILE *output)
 {
     // initialize random
     time_t ts; 

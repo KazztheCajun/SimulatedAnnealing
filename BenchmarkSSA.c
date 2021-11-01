@@ -108,7 +108,7 @@ void ssa_printString(double *s)
 }
 
 
-void ssa_simulated_annealing(double *min_strings, double *origin_strings, double *local_minima, double *timeData, int *loopNum, int loop, int STARTING_HEAT, int ANNEALING_STEPS, int ALPHA)
+void ssa_simulated_annealing(double *min_strings, double *origin_strings, double *local_minima, double *timeData, int *loopNum, int loop, double STARTING_HEAT, int ANNEALING_STEPS, int ALPHA)
 {
     
     // initialize time, temp, repeat counter, and loop counter
@@ -212,7 +212,7 @@ void ssa_simulated_annealing(double *min_strings, double *origin_strings, double
 
 // once algorithm is done, print simple results to console, and detailed stats to a document
 
-void benchmarkSSA(int STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, FILE *output)
+void benchmarkSSA(double STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, FILE *output)
 {
     // initialize random
     time_t ts; 

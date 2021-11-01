@@ -4,6 +4,6 @@
 #include <stdio.h>
 
 // function definitions
-void benchmarkSSA(int STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, FILE *output);
+void benchmarkSSA(double STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, FILE *output);
 
 #endif // end

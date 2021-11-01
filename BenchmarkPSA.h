@@ -4,6 +4,6 @@
 #include <stdio.h>
 
 // function definitions
-void benchmarkPSA(int STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, int MAX_THREADS, FILE *output);
+void benchmarkPSA(double STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, int MAX_THREADS, FILE *output);
 
 #endif // end
