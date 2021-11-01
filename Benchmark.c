@@ -21,7 +21,7 @@ void main()
     double alpha, heat = 0.0;
     for(thread = 2; thread <= 12; thread++)
     {
-        printf("Beginning Thread Test #1!\n", thread);
+        printf("Beginning Thread Test #%d!\n", thread);
         //heat = i*25;
         char *s = (char*)malloc(34 * sizeof(char));
         sprintf(s, "./results/Thread_Benchmark#%d.txt", thread);
@@ -29,7 +29,7 @@ void main()
         FILE * f = fopen(s, "w+");
         if (!f)
         {
-            printf("Error opening/creating \"%s\": %d\n Exiting Benchmark!\n", errno);
+            printf("Error opening/creating \"%s\": %d\n Exiting Benchmark!\n", s, errno);
             return;
         }
         else
@@ -46,7 +46,7 @@ void main()
     FILE * f = fopen(s, "w+");
     if (!f)
     {
-        printf("Error opening/creating \"%s\": %d\n Exiting Benchmark!\n", errno);
+        printf("Error opening/creating \"%s\": %d\n Exiting Benchmark!\n", s, errno);
         return;
     }
     else
