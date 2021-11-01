@@ -41,6 +41,7 @@
 *.su
 *.idb
 *.pdb
+*.exe.stackdump
 
 # Kernel Module Compile Results
 *.mod*
