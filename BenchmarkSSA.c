@@ -201,7 +201,7 @@ void ssa_simulated_annealing(double *min_strings, double *origin_strings, double
     local_minima[loop] = vc; // save evaluation
     tdata = omp_get_wtime() - tdata;
     timeData[loop] =  tdata; // save SA thread run time
-    printf("Local min for thread %d: %.5f | Found in %.5f sec with %d loops\n", omp_get_thread_num(), vc, tdata, time);
+    printf("Local min for loop %d: %.5f | Found in %.5f sec with %d loops\n", loop, vc, tdata, time);
     loopNum[loop] = time; // save total iterations of SA for thread
     free(neighborhood);
     free(current);
@@ -231,12 +231,13 @@ void benchmarkSSA(double STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, FILE 
     int *tl = (int *)malloc(sizeof(int)*MAX_LOOPS); // allocate memeory for the total iterations in a simulated annealing run: [number of loops]
     total = omp_get_wtime();
     printf("Beginning Simulated Annealing with %.1f heat, %d steps, and %.2f alpha!\n", STARTING_HEAT, ANNEALING_STEPS, ALPHA);  
-
-    ssa_simulated_annealing(ms, os, lm, rt, tl, i, 
-                            STARTING_HEAT, 
-                            ANNEALING_STEPS, 
-                            ALPHA);
-
+    for(i = 0; i < MAX_LOOPS; i++)
+    {
+        ssa_simulated_annealing(ms, os, lm, rt, tl, i, 
+                                STARTING_HEAT, 
+                                ANNEALING_STEPS, 
+                                ALPHA);
+    }
     total = omp_get_wtime() - total;
     for(i=0;i<MAX_LOOPS;i++)
     {

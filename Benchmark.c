@@ -19,7 +19,7 @@ void main()
 {
     int i, j, thread, annealing = 0;
     double alpha, heat = 0.0;
-    for(thread = 2; thread <= 12; thread += 2)
+/*    for(thread = 2; thread <= 12; thread += 2)
     {
         printf("Beginning Thread Test #%d!\n", thread);
         //heat = i*25;
@@ -40,7 +40,7 @@ void main()
         free(s);
         fclose(f);
     }
-    
+*/    
     printf("%s\n", "Starting Serial Simulated Annealing Benchmark!");
     char *s = "./results/SearialSA_Benchmark.txt";
     FILE * f = fopen(s, "w+");
