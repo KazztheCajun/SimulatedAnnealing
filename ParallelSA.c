@@ -7,14 +7,14 @@
 #include <math.h>
 #include <errno.h>
 
-#define MAX_LOOPS 100
+#define MAX_LOOPS 200
 #define STRING_LENGTH 200
 #define ANNEALING_STEPS 200
 #define STARTING_HEAT 100
 #define MAX_REPEATED_VALUE 200
 #define ALPHA 0.9
 #define MAX_THREADS 10
-#define SA_CHUNK_SIZE 10
+#define SA_CHUNK_SIZE 5
 #define _USE_MATH_DEFINES 
 
 
@@ -35,7 +35,7 @@ double rastrigin(double *s)
     double sum = 0.0;
     for(i = 0; i < STRING_LENGTH; i++)
     {
-        sum += 10 + ((s[i]*s[i]) - 10*cos(M_TWOPI*s[i]));
+        sum += 10 + ((s[i]*s[i]) - 10*cos(2*M_PI*s[i]));
     }
     return sum;
 }
@@ -272,7 +272,7 @@ void main()
     {
         fprintf(output, "%.5f\n", lm[i]);
     }
-    fprintf(output, "PSA execution times:\n");
+    fprintf(output, "\nTotal Execution time: %.5f seconds\n\nIndividual PSA execution times:\n", total);
     for(l = 0; l < MAX_LOOPS; l++)
     {
         fprintf(output, "%.5f\n", rt[l]);

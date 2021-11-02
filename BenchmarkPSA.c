@@ -165,7 +165,7 @@ void simulated_annealing(double *min_strings, double *origin_strings, double *lo
             if (vc > vn) // rastrigin is a minimization function, so check if vc is greater than vn
             {
                 copyString(neighbor, current);
-                //vc = vn;
+                vc = vn;
                 repeat = 0;
                 //printf("New best found: %.10f\n", vc);
             }
@@ -173,7 +173,7 @@ void simulated_annealing(double *min_strings, double *origin_strings, double *lo
             else if (rand_double(0.0, 0.999999999999999) < exp(-(vn-vc)/temp))
             {
                 copyString(neighbor, current);
-                //vc = vn;
+                vc = vn;
                 repeat = 0;
                 //printf("Annealling jump to: %.10f\n", vc);
             }
@@ -198,8 +198,10 @@ void simulated_annealing(double *min_strings, double *origin_strings, double *lo
     {
         min_strings[loop*MAX_LOOPS + i] = current[i];
     }
-    local_minima[loop] = rastrigin(current); // save evaluation
-    timeData[loop] = omp_get_wtime() - tdata; // save SA thread run time
+    local_minima[loop] = vc; // save evaluation
+    tdata = omp_get_wtime() - tdata;
+    timeData[loop] =  tdata; // save SA thread run time
+    printf("Local min for thread %d: %.5f | Found in %.5f sec with %d loops\n", omp_get_thread_num(), vc, tdata, time);
     loopNum[loop] = time; // save total iterations of SA for thread
     free(neighborhood);
     free(current);
