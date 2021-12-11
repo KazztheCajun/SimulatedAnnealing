@@ -7,10 +7,16 @@
 - Initial Open MP implimentation of my SA algorithm, designed to execute the total iterations in parallel in a Shared Memory environment.
 
 ### BenchmarkPSA_OMP.c 
-- Modified implimentation of ParallelSA, designed to accept input values for the hyperparameters in order to tune them for future experiments.
+- Modified implimentation of ParallelSA, using Open MP programming practices and is designed to accept input for the hyperparameters for tuning and experimentation purposes.
+
+### BenchmarkSSA.c
+- Modified implimentation of SerialSA, designed to execute serially and accept input for the hyperparameters for tuning and experimentation purposes.
 
 ### MPI_PSA.c 
-- Initial MPI implimentation of my SA algorithm, designed to execute the total iterations in parallel in a Distrubuted Memory environment
-<br>
-                                    HOW TO RUN THE CODE 
-<br>
+- Initial MPI implimentation of my SA algorithm, designed to execute the total iterations in parallel in a Distrubuted Memory environment.
+
+# How to run the code
+
+I have created a convenient benchmarking script to test the BenchmarkPSA_OMP and BenchmarkSSA
+
+Just extract the object files for Benchmark.c, BenchmarkPSA_OMP.c, and BenchmarkSSA.c and then compile them into an executable
