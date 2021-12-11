@@ -1,4 +1,4 @@
-###Simulated Annealing Agorithms
+### Simulated Annealing Agorithms
 
 SerialSA.c -- An implimentation of my simulated annealing algorithm designed to execute total iterations in serial (loop 1 then loop 2 then loop 3)
 
