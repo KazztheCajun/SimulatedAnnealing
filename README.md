@@ -11,5 +11,6 @@
 
 ### MPI_PSA.c 
 - Initial MPI implimentation of my SA algorithm, designed to execute the total iterations in parallel in a Distrubuted Memory environment
-
-**************************** HOW TO RUN THE CODE *********************************************
+<br>
+                                    HOW TO RUN THE CODE 
+<br>
