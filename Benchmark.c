@@ -19,7 +19,7 @@ void main()
 {
     int i, j, thread, annealing = 0;
     double alpha, heat = 0.0;
-    for(thread = 2; thread <= 12; thread += 2)
+    for(thread = 4; thread <= 12; thread += 2)
     {
         printf("Beginning Thread Test #%d!\n", thread);
         //heat = i*25;

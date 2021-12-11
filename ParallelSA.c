@@ -7,8 +7,8 @@
 #include <math.h>
 #include <errno.h>
 
-#define MAX_LOOPS 200
-#define STRING_LENGTH 200
+#define MAX_LOOPS 100
+#define STRING_LENGTH 20
 #define ANNEALING_STEPS 200
 #define STARTING_HEAT 100
 #define MAX_REPEATED_VALUE 200
@@ -200,7 +200,7 @@ void simulated_annealing(double *min_strings, double *origin_strings, double *lo
     local_minima[loop] = vc; // save evaluation
     tdata = omp_get_wtime() - tdata;
     timeData[loop] =  tdata; // save SA thread run time
-    printf("Local min for thread %d: %.5f | Found in %.5f sec with %d loops\n", omp_get_thread_num(), vc, tdata, time);
+    printf("Local min for thread %d: %.10f | Found in %.5f sec with %d loops\n", omp_get_thread_num(), vc, tdata, time);
     loopNum[loop] = time; // save total iterations of SA for thread
     free(neighborhood);
     free(current);

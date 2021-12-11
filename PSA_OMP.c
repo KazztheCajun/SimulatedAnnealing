@@ -8,13 +8,13 @@
 #include <errno.h>
 
 #define MAX_LOOPS 100
-#define STRING_LENGTH 100
-//#define ANNEALING_STEPS 100
-//#define STARTING_HEAT 100
+#define STRING_LENGTH 20
+#define ANNEALING_STEPS 100
+#define STARTING_HEAT 100.0
 #define MAX_REPEATED_VALUE 200
-//#define ALPHA 0.9
-//#define MAX_THREADS 10
-//#define SA_CHUNK_SIZE 10
+#define ALPHA 0.9
+#define MAX_THREADS 10
+#define SA_CHUNK_SIZE 10
 #define _USE_MATH_DEFINES 
 
 
@@ -108,7 +108,7 @@ void printString(double *s)
 }
 
 
-void simulated_annealing(double *min_strings, double *origin_strings, double *local_minima, double *timeData, int *loopNum, int loop, double STARTING_HEAT, int ANNEALING_STEPS, int ALPHA)
+void simulated_annealing(double *min_strings, double *origin_strings, double *local_minima, double *timeData, int *loopNum, int loop)
 {
     
     // initialize time, temp, repeat counter, and loop counter
@@ -201,7 +201,7 @@ void simulated_annealing(double *min_strings, double *origin_strings, double *lo
     local_minima[loop] = vc; // save evaluation
     tdata = omp_get_wtime() - tdata;
     timeData[loop] =  tdata; // save SA thread run time
-    printf("Local min for thread %d: %.5f | Found in %.5f sec with %d loops\n", omp_get_thread_num(), vc, tdata, time);
+    printf("Local min for thread %d: %.10f | Found in %.5f sec with %d loops\n", omp_get_thread_num(), vc, tdata, time);
     loopNum[loop] = time; // save total iterations of SA for thread
     free(neighborhood);
     free(current);
@@ -214,12 +214,12 @@ void simulated_annealing(double *min_strings, double *origin_strings, double *lo
 
 // once algorithm is done, print simple results to console, and detailed stats to a document
 
-void benchmarkPSA(double STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, int MAX_THREADS, FILE *output)
+int main()
 {
     // initialize random
     time_t ts; 
     srand(time(&ts));
-    //FILE *output;
+    FILE *output;
     int i, j, l, threads = 0;
     double sum, total = 0.0;
     double min = 200000.0;
@@ -230,6 +230,18 @@ void benchmarkPSA(double STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, int M
     double *tt = (double *)malloc(sizeof(double)*MAX_LOOPS); // allocate memeory for the total time of each simulated annealing: [number of loops]
     int *tl = (int *)malloc(sizeof(int)*MAX_LOOPS); // allocate memeory for the total iterations in a simulated annealing run: [number of loops]
     omp_set_num_threads(MAX_THREADS);
+
+    FILE * f = fopen("./results/PSA_OMP.txt", "w+");
+    if (!f)
+    {
+        printf("Error opening/creating \"%s\": %d\n Exiting Run!\n", "PSA_OMP.txt", errno);
+        return errno;
+    }
+    else
+    {
+        printf("File \"%s\" opened sucessfully\n", "PSA_OMP.txt");
+    }
+
     total = omp_get_wtime();
     printf("Beginning Simulated Annealing with %.2f heat, %d steps, %.2f alpha, and %d threads!\n", STARTING_HEAT, ANNEALING_STEPS, ALPHA, MAX_THREADS);
     #pragma omp parallel for schedule(dynamic, (MAX_LOOPS / MAX_THREADS))
@@ -240,10 +252,7 @@ void benchmarkPSA(double STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, int M
             threads = omp_get_num_threads();
         }
         
-        simulated_annealing(ms, os, lm, rt, tl, i, 
-                            STARTING_HEAT, 
-                            ANNEALING_STEPS, 
-                            ALPHA);
+        simulated_annealing(ms, os, lm, rt, tl, i);
     }
 
     total = omp_get_wtime() - total;
@@ -292,4 +301,5 @@ void benchmarkPSA(double STARTING_HEAT, int ANNEALING_STEPS, double ALPHA, int M
     free(os);
     free(lm);
     fclose(output);
+    return 0;
 }
